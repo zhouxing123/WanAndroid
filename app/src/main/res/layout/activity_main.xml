@@ -1,0 +1,86 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:bind="http://schemas.android.com/apk/res-auto">
+
+    <LinearLayout
+        android:orientation="vertical"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        >
+
+        <include android:id="@+id/title"
+            layout="@layout/include_title"/>
+
+        <FrameLayout
+            android:id="@+id/content"
+            android:background="@color/white"
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            android:layout_weight="1"
+            >
+
+        </FrameLayout>
+
+        <RelativeLayout
+            android:layout_alignParentBottom="true"
+            android:layout_width="wrap_content"
+            android:layout_height="49dp"
+            android:background="@android:color/transparent">
+
+            <RadioGroup
+                android:id="@+id/rd_group"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_alignParentBottom="true"
+                android:background="@android:color/transparent"
+                android:orientation="horizontal">
+
+                <RadioButton
+                    android:id="@+id/rd_menu_first"
+                    style="@style/tab_menu_item"
+                    android:button="@null"
+                    android:drawableTop="@drawable/tab_menu_first"
+                    android:paddingTop="4dp"
+                    android:text="首页"
+                    android:visibility="visible"
+                    android:textColor="@drawable/tab_menu_text_select"
+                    android:textSize="12sp" />
+
+                <RadioButton
+                    android:id="@+id/rd_menu_two"
+                    style="@style/tab_menu_item"
+                    android:drawableTop="@drawable/tab_menu_two"
+                    android:paddingTop="4dp"
+                    android:text="知识体系"
+                    android:textColor="@drawable/tab_menu_text_select"
+                    android:textSize="12sp" />
+
+                <RadioButton
+                    android:id="@+id/rd_menu_three"
+                    style="@style/tab_menu_item"
+                    android:drawableTop="@drawable/tab_menu_three"
+                    android:paddingTop="4dp"
+                    android:text="导航"
+                    android:textColor="@drawable/tab_menu_text_select"
+                    android:textSize="12sp" />
+                <RadioButton
+                    android:id="@+id/rd_menu_four"
+                    style="@style/tab_menu_item"
+                    android:drawableTop="@drawable/tab_menu_four"
+                    android:paddingTop="4dp"
+                    android:text="项目"
+                    android:textColor="@drawable/tab_menu_text_select"
+                    android:textSize="13sp" />
+
+
+            </RadioGroup>
+
+            <View
+                android:layout_width="match_parent"
+                android:layout_height="1px"
+                android:background="@color/text_gray">
+
+            </View>
+        </RelativeLayout>
+    </LinearLayout>
+</layout>

@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="utf-8"?>
+<manifest xmlns:android="http://schemas.android.com/apk/res/android"
+    package="com.yihui.wanandroid">
+
+    <uses-permission android:name="android.permission.INTERNET"/>
+
+    <!--当allowBackup标志为true时，用户即可通过adb backup和adb restore来进行对应用数据的备份和恢复，这可能会带来一定的安全风险。所以如非必要请设为false-->
+    <application
+        android:allowBackup="false"
+        android:icon="@mipmap/icon_72"
+        android:label="@string/app_name"
+        android:roundIcon="@mipmap/icon_72"
+        android:supportsRtl="true"
+        android:name=".app.BaseApp"
+        android:theme="@style/AppTheme">
+        <activity android:name=".ui.SplashActivity">
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
+
+                <category android:name="android.intent.category.LAUNCHER" />
+            </intent-filter>
+        </activity>
+
+        <activity android:name="com.yihui.wanandroid.ui.main.MainActivity"/>
+    </application>
+
+</manifest>
