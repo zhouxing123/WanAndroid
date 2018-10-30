@@ -34,7 +34,7 @@ import java.util.List;
         }
     }
 
-     void onFinished(List<String> items) {
+     void onFinished(List<ArticleModel.DataBean.DatasBean> items) {
         if (firstPageView != null) {
             firstPageView.setItems(items);
             firstPageView.hideProgress();

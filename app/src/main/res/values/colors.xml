@@ -13,4 +13,6 @@
     <color name="text_black">#000000</color>
 
     <color name="text_black_1">#90000000</color>
+
+    <color name="gray">#61000000</color>
 </resources>

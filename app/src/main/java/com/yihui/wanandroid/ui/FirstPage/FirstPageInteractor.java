@@ -3,6 +3,7 @@ package com.yihui.wanandroid.ui.FirstPage;
 import android.os.Handler;
 import android.util.Log;
 
+import com.google.gson.Gson;
 import com.lzy.okgo.OkGo;
 import com.lzy.okgo.callback.StringCallback;
 import com.lzy.okgo.model.Response;
@@ -20,17 +21,18 @@ import java.util.List;
  * @describe: [产品/模块版本]
  */
 public class FirstPageInteractor {
-
+    OnFinishedListener listener;
     interface OnFinishedListener {
-        void onFinished(List<String> items);
+        void onFinished(List<ArticleModel.DataBean.DatasBean> items);
     }
 
     public void findItems(final OnFinishedListener listener) {
-        listener.onFinished(createArrayList());
+        this.listener = listener;
+        createArrayList();
     }
 
-    private List<String> createArrayList() {
-        Log.d("------------------","createArrayList");
+    private void createArrayList() {
+
         OkGo.<String>get(Urls.URL_ARTICLE)//
                 .tag(this)//
                 .headers("header1", "headerValue1")//
@@ -40,6 +42,10 @@ public class FirstPageInteractor {
                         //注意这里已经是在主线程了
                         String data = response.body();//这个就是返回来的结果
                         Log.d("------------------","------");
+                        Gson gson = new Gson();
+                        ArticleModel articleModel = gson.fromJson(response.body(),ArticleModel.class);
+                        List<ArticleModel.DataBean.DatasBean> datas = articleModel.getData().getDatas();
+                        listener.onFinished(datas);
                     }
 
                     @Override
@@ -47,7 +53,7 @@ public class FirstPageInteractor {
                         super.onError(response);
                     }
                 });
-        return null;
+
 //                "Item 1",
 //                "Item 2",
 //                "Item 3",

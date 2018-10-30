@@ -16,7 +16,7 @@ public interface FirstPageView {
 
     void hideProgress();
 
-    void setItems(List<String> items);
+    void setItems(List<ArticleModel.DataBean.DatasBean> items);
 
     void showMessage(String message);
 }

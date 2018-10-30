@@ -2,23 +2,27 @@ package com.yihui.wanandroid.ui.FirstPage;
 
 import android.content.Context;
 import android.databinding.DataBindingUtil;
-import android.databinding.ViewDataBinding;
 import android.net.Uri;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
+import android.support.v7.widget.DividerItemDecoration;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+
+import com.orhanobut.logger.Logger;
 import com.yihui.wanandroid.databinding.FragmentFirstBinding;
 
 import com.yihui.wanandroid.R;
-import com.yihui.wanandroid.ui.fragment.FirstPageAdapter;
+import com.yihui.wanandroid.ui.WebviewActivity;
+import com.yihui.wanandroid.utils.GotoActivity;
+import com.yihui.wanandroid.widget.CustomDecoration;
 
-import java.util.ArrayList;
 import java.util.List;
 
 
-public class FirstFragment extends Fragment implements FirstPageView{
+public class FirstFragment extends Fragment implements FirstPageView {
     private static final String ARG_PARAM1 = "param1";
     private static final String ARG_PARAM2 = "param2";
 
@@ -48,7 +52,7 @@ public class FirstFragment extends Fragment implements FirstPageView{
             mParam1 = getArguments().getString(ARG_PARAM1);
             mParam2 = getArguments().getString(ARG_PARAM2);
         }
-        initView();
+
     }
 
 
@@ -56,16 +60,19 @@ public class FirstFragment extends Fragment implements FirstPageView{
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         mainBinding = DataBindingUtil.inflate(inflater, R.layout.fragment_first, container, false);
+        initView();
         return mainBinding.getRoot();
     }
 
 
     public void initView() {
+
+
+        CustomDecoration customDecoration = new CustomDecoration(getActivity(), DividerItemDecoration.VERTICAL, R.drawable.graydivider, 5);
+        mainBinding.list.addItemDecoration(customDecoration);
+
         presenter = new FirstPresenter(this, new FirstPageInteractor());
-//        ArticleModel.DataBean.DatasBean datasBean = new ArticleModel.DataBean.DatasBean();
-//        List list = new ArrayList();
-//        list.add(datasBean);
-//        mainBinding.list.setAdapter(new FirstPageAdapter(list));
+
         presenter.onResume();
     }
 
@@ -103,8 +110,24 @@ public class FirstFragment extends Fragment implements FirstPageView{
     }
 
     @Override
-    public void setItems(List<String> items) {
+    public void setItems(List<ArticleModel.DataBean.DatasBean> items) {
+        FirstPageAdapter firstPageAdapter = new FirstPageAdapter(items);
+        mainBinding.list.setAdapter(firstPageAdapter);
+        firstPageAdapter.setOnItemClickListener(new FirstPageAdapter.OnItemClickListener() {
+            @Override
+            public void onItemClicked(ArticleModel.DataBean.DatasBean item) {
+                com.orhanobut.logger.Logger.d(item.getTitle()+"---"+item.getApkLink());
+                Bundle bundle = new Bundle();
+                bundle.putString("url",item.getLink());
+                bundle.putString("title",item.getAuthor());
+                GotoActivity.gotoActiviy(getActivity(),WebviewActivity.class,bundle);
+            }
 
+            @Override
+            public void onItemChecked(ArticleModel.DataBean.DatasBean item) {
+                Log.d("2","2");
+            }
+        });
     }
 
     @Override
