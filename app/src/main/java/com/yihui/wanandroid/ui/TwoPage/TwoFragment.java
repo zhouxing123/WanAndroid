@@ -1,48 +1,47 @@
-package com.yihui.wanandroid.ui.fragment;
+package com.yihui.wanandroid.ui.TwoPage;
 
 import android.content.Context;
+import android.databinding.DataBindingUtil;
+import android.databinding.ViewDataBinding;
 import android.net.Uri;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
+import android.support.v7.widget.DividerItemDecoration;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
 import com.yihui.wanandroid.R;
+import com.yihui.wanandroid.databinding.FragmentTwoBinding;
+import com.yihui.wanandroid.ui.ThirdPage.StanavTypeAdapter;
+import com.yihui.wanandroid.ui.ThirdPage.StanavTypeModel;
+import com.yihui.wanandroid.ui.ThirdPage.ThirdPageInteractor;
+import com.yihui.wanandroid.ui.ThirdPage.ThirdPagePresenter;
+import com.yihui.wanandroid.widget.CustomDecoration;
+
+import java.util.List;
 
 /**
- * A simple {@link Fragment} subclass.
- * Activities that contain this fragment must implement the
- * {@link TwoFragment.OnFragmentInteractionListener} interface
- * to handle interaction events.
- * Use the {@link TwoFragment#newInstance} factory method to
- * create an instance of this fragment.
+ * 知识体系
+ * @author: zhouxing
+ * @version: [1.0, ${DATE}]
+ * @see: [相关类/方法]
+ * @describe: [产品/模块版本]
  */
-public class TwoFragment extends Fragment {
-    // TODO: Rename parameter arguments, choose names that match
-    // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
+public class TwoFragment extends Fragment implements SecondPageView {
     private static final String ARG_PARAM1 = "param1";
     private static final String ARG_PARAM2 = "param2";
 
-    // TODO: Rename and change types of parameters
     private String mParam1;
     private String mParam2;
 
     private OnFragmentInteractionListener mListener;
-
+    private FragmentTwoBinding mainBinding;
+    private SecondPagePresenter presenter;
+    private KnowledgeTypeAdapter knowledgeTypeAdapter;
     public TwoFragment() {
-        // Required empty public constructor
     }
 
-    /**
-     * Use this factory method to create a new instance of
-     * this fragment using the provided parameters.
-     *
-     * @param param1 Parameter 1.
-     * @param param2 Parameter 2.
-     * @return A new instance of fragment TwoFragment.
-     */
-    // TODO: Rename and change types and number of parameters
     public static TwoFragment newInstance(String param1, String param2) {
         TwoFragment fragment = new TwoFragment();
         Bundle args = new Bundle();
@@ -64,11 +63,24 @@ public class TwoFragment extends Fragment {
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
-        // Inflate the layout for this fragment
-        return inflater.inflate(R.layout.fragment_two, container, false);
+        mainBinding = DataBindingUtil.inflate(inflater, R.layout.fragment_two, container, false);
+        initView();
+        return mainBinding.getRoot();
     }
 
-    // TODO: Rename method, update argument and hook method into UI event
+    private void initView() {
+        CustomDecoration customDecoration = new CustomDecoration(getActivity(), DividerItemDecoration.VERTICAL, R.drawable.graydivider, 5);
+        mainBinding.rlvKnowledgeType.addItemDecoration(customDecoration);
+         knowledgeTypeAdapter = new KnowledgeTypeAdapter();
+        mainBinding.rlvKnowledgeType.setAdapter(knowledgeTypeAdapter);
+         knowledgeTypeAdapter.setOnItemClickListener((adapter, view, position) -> {
+
+        });
+
+        presenter = new SecondPagePresenter(this, new SecondPageInteractor());
+        presenter.onResume();
+    }
+
     public void onButtonPressed(Uri uri) {
         if (mListener != null) {
             mListener.onFragmentInteraction(uri);
@@ -92,18 +104,23 @@ public class TwoFragment extends Fragment {
         mListener = null;
     }
 
-    /**
-     * This interface must be implemented by activities that contain this
-     * fragment to allow an interaction in this fragment to be communicated
-     * to the activity and potentially other fragments contained in that
-     * activity.
-     * <p>
-     * See the Android Training lesson <a href=
-     * "http://developer.android.com/training/basics/fragments/communicating.html"
-     * >Communicating with Other Fragments</a> for more information.
-     */
+    @Override
+    public void showProgress() {
+
+    }
+
+    @Override
+    public void hideProgress() {
+
+    }
+
+    @Override
+    public void setItems(List<KnowledgeTypeModel.DataBean> items) {
+        knowledgeTypeAdapter.setNewData(items);
+    }
+
+
     public interface OnFragmentInteractionListener {
-        // TODO: Update argument type and name
         void onFragmentInteraction(Uri uri);
     }
 }

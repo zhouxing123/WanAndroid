@@ -1,0 +1,44 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="200dp">
+
+    <com.yihui.wanandroid.widget.ViewPagerTransform
+        android:background="@color/colorPrimary"
+        android:id="@+id/vp_article_head"
+        android:contentDescription="@null"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent" />
+
+    <LinearLayout
+        android:layout_alignParentBottom="true"
+        android:background="#33000000"
+        android:orientation="horizontal"
+        android:layout_gravity="bottom"
+        android:gravity="center_vertical"
+        android:layout_width="match_parent"
+        android:layout_height="35dip">
+        <TextView
+            android:id="@+id/tv_pager_title"
+            android:text="很长的标题。。。。。你懂我意思吧"
+            android:paddingLeft="8dip"
+            android:gravity="center_vertical"
+            android:textColor="@color/white"
+            android:layout_width="wrap_content"
+            android:layout_weight="1"
+            android:layout_height="35dip"/>
+        <!--用来动态添加轮播小点-->
+        <LinearLayout
+            android:id="@+id/lineLayout_dot"
+            android:gravity="center|right"
+            android:layout_marginRight="5dp"
+            android:paddingLeft="3dp"
+            android:paddingRight="3dp"
+            android:orientation="horizontal"
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent">
+        </LinearLayout>
+
+    </LinearLayout>
+</RelativeLayout>

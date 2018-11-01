@@ -13,9 +13,9 @@ import android.widget.RadioGroup;
 import com.yihui.wanandroid.R;
 import com.yihui.wanandroid.databinding.ActivityMainBinding;
 import com.yihui.wanandroid.ui.FirstPage.FirstFragment;
-import com.yihui.wanandroid.ui.fragment.FourFragment;
-import com.yihui.wanandroid.ui.fragment.ThreeFragment;
-import com.yihui.wanandroid.ui.fragment.TwoFragment;
+import com.yihui.wanandroid.ui.FourPage.FourFragment;
+import com.yihui.wanandroid.ui.ThirdPage.ThreeFragment;
+import com.yihui.wanandroid.ui.TwoPage.TwoFragment;
 
 import java.lang.ref.WeakReference;
 /**

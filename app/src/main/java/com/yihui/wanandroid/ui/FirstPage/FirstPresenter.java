@@ -25,8 +25,29 @@ import java.util.List;
             firstPageView.showProgress();
         }
 
-        firstPageInteractor.findItems(this::onFinished);
+        firstPageInteractor.findItems();
+
+        firstPageInteractor.setListener(new FirstPageInteractor.OnFinishedListener() {
+            @Override
+            public void onFinished(List<ArticleModel.DataBean.DatasBean> items) {
+                if (firstPageView != null) {
+                    firstPageView.setItems(items);
+                    firstPageView.hideProgress();
+                }
+            }
+
+            @Override
+            public void onArticleBanner(List<ArticleBannerModel.DataBean> datas) {
+                if (firstPageView != null) {
+                    firstPageView.setBanner(datas);
+                    firstPageView.hideProgress();
+                }
+            }
+        });
     }
+
+
+
 
      void onItemClicked(String item) {
         if (firstPageView != null) {
@@ -41,7 +62,5 @@ import java.util.List;
         }
     }
 
-    public FirstPageView getMainView() {
-        return firstPageView;
-    }
+
 }

@@ -2,85 +2,228 @@
 <layout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:bind="http://schemas.android.com/apk/res-auto">
 
-    <LinearLayout
-        android:orientation="vertical"
+    <android.support.v4.widget.DrawerLayout
+        android:id="@+id/drawer_layout"
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        >
-
-        <include android:id="@+id/title"
-            layout="@layout/include_title"/>
-
-        <FrameLayout
-            android:id="@+id/content"
-            android:background="@color/white"
+        android:layout_height="match_parent">
+        <!-- The main content view -->
+        <LinearLayout
+            android:orientation="vertical"
             android:layout_width="match_parent"
-            android:layout_height="0dp"
-            android:layout_weight="1"
+            android:layout_height="match_parent"
             >
+            <include android:id="@+id/title"
+                layout="@layout/include_title"/>
 
-        </FrameLayout>
-
-        <RelativeLayout
-            android:layout_alignParentBottom="true"
-            android:layout_width="wrap_content"
-            android:layout_height="49dp"
-            android:background="@android:color/transparent">
-
-            <RadioGroup
-                android:id="@+id/rd_group"
+            <FrameLayout
+                android:id="@+id/content"
+                android:background="@color/white"
                 android:layout_width="match_parent"
-                android:layout_height="match_parent"
+                android:layout_height="0dp"
+                android:layout_weight="1"
+                >
+
+            </FrameLayout>
+
+            <RelativeLayout
                 android:layout_alignParentBottom="true"
-                android:background="@android:color/transparent"
+                android:layout_width="wrap_content"
+                android:layout_height="49dp"
+                android:background="@android:color/transparent">
+
+                <RadioGroup
+                    android:id="@+id/rd_group"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:layout_alignParentBottom="true"
+                    android:background="@android:color/transparent"
+                    android:orientation="horizontal">
+
+                    <RadioButton
+                        android:id="@+id/rd_menu_first"
+                        style="@style/tab_menu_item"
+                        android:button="@null"
+                        android:drawableTop="@drawable/tab_menu_first"
+                        android:paddingTop="4dp"
+                        android:text="首页"
+                        android:visibility="visible"
+                        android:textColor="@drawable/tab_menu_text_select"
+                        android:textSize="12sp" />
+
+                    <RadioButton
+                        android:id="@+id/rd_menu_two"
+                        style="@style/tab_menu_item"
+                        android:drawableTop="@drawable/tab_menu_two"
+                        android:paddingTop="4dp"
+                        android:text="知识体系"
+                        android:textColor="@drawable/tab_menu_text_select"
+                        android:textSize="12sp" />
+
+                    <RadioButton
+                        android:id="@+id/rd_menu_three"
+                        style="@style/tab_menu_item"
+                        android:drawableTop="@drawable/tab_menu_three"
+                        android:paddingTop="4dp"
+                        android:text="导航"
+                        android:textColor="@drawable/tab_menu_text_select"
+                        android:textSize="12sp" />
+                    <RadioButton
+                        android:id="@+id/rd_menu_four"
+                        style="@style/tab_menu_item"
+                        android:drawableTop="@drawable/tab_menu_four"
+                        android:paddingTop="4dp"
+                        android:text="项目"
+                        android:textColor="@drawable/tab_menu_text_select"
+                        android:textSize="13sp" />
+
+
+                </RadioGroup>
+
+                <View
+                    android:layout_width="match_parent"
+                    android:layout_height="1px"
+                    android:background="@color/text_gray">
+
+                </View>
+            </RelativeLayout>
+        </LinearLayout>
+        <!-- The navigation drawer -->
+        <LinearLayout android:id="@+id/left_drawer"
+            android:layout_width="240dp"
+            android:layout_height="match_parent"
+            android:layout_gravity="start"
+            android:choiceMode="singleChoice"
+            android:divider="#33333333"
+            android:dividerHeight="0dp"
+            android:background="#ffeeeeee"
+            android:orientation="vertical"
+            android:scrollbars="none">
+
+            <LinearLayout
+                android:orientation="vertical"
+                android:gravity="center"
+                android:layout_width="match_parent"
+                android:layout_height="150dp">
+
+                <ImageView
+                    android:id="@+id/iv_person"
+                    android:background="@mipmap/dot_focus"
+                    android:contentDescription="@null"
+                    android:layout_width="50dp"
+                    android:layout_height="50dp" />
+
+                <TextView
+                    android:layout_marginTop="15dp"
+                    android:id="@+id/tv_user_name"
+                    android:text="昵称"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content" />
+            </LinearLayout>
+
+            <LinearLayout
+                android:gravity="center_vertical"
+                android:layout_width="match_parent"
+                android:layout_height="50dp"
                 android:orientation="horizontal">
 
-                <RadioButton
-                    android:id="@+id/rd_menu_first"
-                    style="@style/tab_menu_item"
-                    android:button="@null"
-                    android:drawableTop="@drawable/tab_menu_first"
-                    android:paddingTop="4dp"
-                    android:text="首页"
-                    android:visibility="visible"
-                    android:textColor="@drawable/tab_menu_text_select"
-                    android:textSize="12sp" />
+                <ImageView
+                    android:layout_marginStart="16dp"
+                    android:background="@mipmap/dot_focus"
+                    android:contentDescription="@null"
+                    android:layout_width="25dp"
+                    android:layout_height="25dp" />
 
-                <RadioButton
-                    android:id="@+id/rd_menu_two"
-                    style="@style/tab_menu_item"
-                    android:drawableTop="@drawable/tab_menu_two"
-                    android:paddingTop="4dp"
-                    android:text="知识体系"
-                    android:textColor="@drawable/tab_menu_text_select"
-                    android:textSize="12sp" />
-
-                <RadioButton
-                    android:id="@+id/rd_menu_three"
-                    style="@style/tab_menu_item"
-                    android:drawableTop="@drawable/tab_menu_three"
-                    android:paddingTop="4dp"
-                    android:text="导航"
-                    android:textColor="@drawable/tab_menu_text_select"
-                    android:textSize="12sp" />
-                <RadioButton
-                    android:id="@+id/rd_menu_four"
-                    style="@style/tab_menu_item"
-                    android:drawableTop="@drawable/tab_menu_four"
-                    android:paddingTop="4dp"
-                    android:text="项目"
-                    android:textColor="@drawable/tab_menu_text_select"
-                    android:textSize="13sp" />
-
-
-            </RadioGroup>
-
-            <View
+                <TextView
+                    android:text="TODO工具"
+                    android:textColor="@color/text_black"
+                    android:layout_marginStart="25dp"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content" />
+            </LinearLayout>
+            <LinearLayout
+                android:gravity="center_vertical"
                 android:layout_width="match_parent"
-                android:layout_height="1px"
-                android:background="@color/text_gray">
+                android:layout_height="50dp"
+                android:orientation="horizontal">
 
-            </View>
-        </RelativeLayout>
-    </LinearLayout>
+                <ImageView
+                    android:layout_marginStart="16dp"
+                    android:background="@mipmap/dot_focus"
+                    android:contentDescription="@null"
+                    android:layout_width="25dp"
+                    android:layout_height="25dp" />
+
+                <TextView
+                    android:layout_marginStart="25dp"
+                    android:text="夜间模式"
+                    android:textColor="@color/text_black"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content" />
+            </LinearLayout>
+
+            <LinearLayout
+                android:gravity="center_vertical"
+                android:layout_width="match_parent"
+                android:layout_height="50dp"
+                android:orientation="horizontal">
+
+                <ImageView
+                    android:layout_marginStart="16dp"
+                    android:background="@mipmap/dot_focus"
+                    android:contentDescription="@null"
+                    android:layout_width="25dp"
+                    android:layout_height="25dp" />
+
+                <TextView
+                    android:layout_marginStart="25dp"
+                    android:text="设置"
+                    android:textColor="@color/text_black"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content" />
+            </LinearLayout>
+
+            <LinearLayout
+                android:gravity="center_vertical"
+                android:layout_width="match_parent"
+                android:layout_height="50dp"
+                android:orientation="horizontal">
+
+                <ImageView
+                    android:layout_marginStart="16dp"
+                    android:background="@mipmap/dot_focus"
+                    android:contentDescription="@null"
+                    android:layout_width="25dp"
+                    android:layout_height="25dp" />
+
+                <TextView
+                    android:layout_marginStart="25dp"
+                    android:text="关于我"
+                    android:textColor="@color/text_black"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content" />
+            </LinearLayout>
+
+            <LinearLayout
+                android:gravity="center_vertical"
+                android:layout_width="match_parent"
+                android:layout_height="50dp"
+                android:orientation="horizontal">
+
+                <ImageView
+                    android:layout_marginStart="16dp"
+                    android:background="@mipmap/dot_focus"
+                    android:contentDescription="@null"
+                    android:layout_width="25dp"
+                    android:layout_height="25dp" />
+
+                <TextView
+                    android:layout_marginStart="25dp"
+                    android:text="退出登录"
+                    android:textColor="@color/text_black"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content" />
+            </LinearLayout>
+        </LinearLayout>
+    </android.support.v4.widget.DrawerLayout>
+
 </layout>

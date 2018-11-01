@@ -18,5 +18,7 @@ public interface FirstPageView {
 
     void setItems(List<ArticleModel.DataBean.DatasBean> items);
 
+    void setBanner(List<ArticleBannerModel.DataBean> items);
+
     void showMessage(String message);
 }

@@ -9,7 +9,6 @@ import com.lzy.okgo.callback.StringCallback;
 import com.lzy.okgo.model.Response;
 import com.yihui.wanandroid.utils.Urls;
 
-import java.util.Arrays;
 import java.util.List;
 
 /**
@@ -24,12 +23,15 @@ public class FirstPageInteractor {
     OnFinishedListener listener;
     interface OnFinishedListener {
         void onFinished(List<ArticleModel.DataBean.DatasBean> items);
+
+        void onArticleBanner(List<ArticleBannerModel.DataBean> datas);
     }
 
-    public void findItems(final OnFinishedListener listener) {
-        this.listener = listener;
+    public void findItems() {
         createArrayList();
+        getBannerList();
     }
+
 
     private void createArrayList() {
 
@@ -53,17 +55,34 @@ public class FirstPageInteractor {
                         super.onError(response);
                     }
                 });
+    }
 
-//                "Item 1",
-//                "Item 2",
-//                "Item 3",
-//                "Item 4",
-//                "Item 5",
-//                "Item 6",
-//                "Item 7",
-//                "Item 8",
-//                "Item 9",
-//                "Item 10"
-//        );
+    private void getBannerList() {
+
+        OkGo.<String>get(Urls.URL_ARTICLE_BANNER)//
+                .tag(this)//
+                .headers("header1", "headerValue1")//
+                .execute(new StringCallback() {
+                    @Override
+                    public void onSuccess(Response<String> response) {
+                        //注意这里已经是在主线程了
+                        String data = response.body();//这个就是返回来的结果
+                        Log.d("------------------","------");
+                        Gson gson = new Gson();
+                        ArticleBannerModel articleModel = gson.fromJson(response.body(),ArticleBannerModel.class);
+                        List<ArticleBannerModel.DataBean> datas = articleModel.getData();
+                        listener.onArticleBanner(datas);
+                    }
+
+                    @Override
+                    public void onError(Response<String> response) {
+                        super.onError(response);
+                    }
+                });
+    }
+
+
+    public void setListener(OnFinishedListener listener) {
+        this.listener = listener;
     }
 }
